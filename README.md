@@ -1,3 +1,7 @@
+[![Linux/Mac/Windows build status](
+  https://circleci.com/gh/dwave-examples/anneal-schedule-notebook.svg?style=svg)](
+  https://circleci.com/gh/dwave-examples/anneal-schedule-notebook)
+
 # Anneal Schedule
 
 This notebook explains and demonstrates the global anneal scheduling feature.
