@@ -59,6 +59,9 @@ def robust_run_jn(jn, timeout, retries):
 def cell_text(nb, cell):
     return nb["cells"][cell]["outputs"][0]["text"]
 
+def cell_output(nb, cell, part, data_type):
+    return nb["cells"][cell]["outputs"][part][data_type]
+
 jn_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 jn_file = os.path.join(jn_dir, '01-anneal-schedule.ipynb')
 
@@ -72,3 +75,48 @@ class TestJupyterNotebook(unittest.TestCase):
         nb, errors = robust_run_jn(jn_file, MAX_RUN_TIME, MAX_EMBEDDING_RETRIES)
 
         self.assertEqual(errors, [])
+
+        # Section Feature Availability, code cell 1
+        self.assertIn("Connected to sampler", cell_text(nb, 3))
+
+        # Section Feature Availability, code cell 2
+        self.assertIn("Maximum anneal schedule points", cell_text(nb, 4))
+
+        # Section Understanding the Anneal Schedule, code cell 1
+        self.assertIn("Annealing time range", cell_text(nb, 7))
+
+        # Section Understanding the Anneal Schedule, Subsection Pause, code cell 1
+        self.assertIn("Schedule", cell_output(nb, 11, 2, "text"))
+
+        # Section Understanding the Anneal Schedule, Subsection Quesnch, code cell 1
+        self.assertIn("Schedule", cell_output(nb, 14, 0, "text"))
+
+        # Section Understanding the Anneal Schedule, Subsection Pause & Quesnch, code cell 1
+        self.assertIn("Schedule", cell_output(nb, 16, 0, "text"))
+
+        # Section Using Anneal Schedule Features, code cell 3
+        self.assertIn("QPU time used", cell_text(nb, 22))
+
+        # Section Using Anneal Schedule Features, code cell 4
+        self.assertIn("image/png", cell_output(nb, 24, 0, "data"))
+
+        # Section Using Anneal Schedule Features, code cell 5
+        self.assertIn("Ground state probability", cell_text(nb, 26))
+
+        # Section Using Anneal Schedule Features, Subsection Using Pause, code cell 2
+        self.assertIn("application/javascript", cell_output(nb, 30, 1, "data"))
+
+        # Section Using Anneal Schedule Features, Subsection Using Pause, code cell 3
+        self.assertIn("Success probability", cell_output(nb, 32, 0, "text"))
+
+        # Section Using Anneal Schedule Features, Subsection Quench, code cell 2
+        self.assertIn("application/javascript", cell_output(nb, 36, 1, "data"))
+
+        # Section Using Anneal Schedule Features, Subsection Quench, code cell 3
+        self.assertIn("Success probability", cell_output(nb, 38, 0, "text"))
+
+        # Section Running the Paused Anneals on the QPU, code cell 1
+        self.assertIn("Starting QPU calls", cell_text(nb, 41))
+
+        # Section Running the Quenched Anneals on the QPU, code cell 1
+        self.assertIn("Starting QPU calls", cell_text(nb, 43))
