@@ -13,6 +13,7 @@
 #    limitations under the License.
 
 import matplotlib.pyplot as plt
+from itertools import cycle
 
 # Plot the anneal schedule
 def plot_schedule(schedule, title):
@@ -23,3 +24,42 @@ def plot_schedule(schedule, title):
     plt.xlabel('Time [us]')
     plt.ylabel('Annealing Parameter s')
     plt.show()
+
+# Plot the success fraction of an anneal schedule
+all_colors = ["dodgerblue", "orange", "darkorchid"]
+all_lines = [[4, 1, 1, 4], [4, 4], [4, 0]]
+all_markers = ["o", "s", "^", "D"]
+
+def plot_success_fraction(success_prob, title, group):
+
+    if group == "pause_duration":
+        group_label = "pause"
+    else:
+        group_label = "quench slope"
+
+    fig, ax = plt.subplots(figsize=(12,12))
+    ax.set_title(title)
+    plt.xlabel('s at Pause Start')
+    plt.ylabel('Ground-State Fraction')
+    ax.set_yscale('log')
+    ax.set_ylim([1e-3, 0.65])
+
+    colors = cycle(all_colors)
+    lines = cycle(all_lines)
+
+    for anneal,a_group in success_prob.groupby('anneal_time'):
+        col = next(colors)
+        line = next(lines)
+
+        markers = cycle(all_markers)
+        for pq,p_group in a_group.groupby(group):
+            marker = next(markers)
+
+            x = p_group["s_feature"].values
+            y = p_group["success_frac"].values
+            ax.plot(x, y, label=f"anneal={anneal}, {group_label}={pq}", color=col, dashes=line, linewidth=2)
+            ax.scatter(x, y, color=col)
+
+    ax.legend(loc='upper left')
+    plt.show()
+    return {"figure": fig, "axis": ax}
