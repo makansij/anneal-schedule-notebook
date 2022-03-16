@@ -34,15 +34,17 @@ def plot_success_fraction(success_prob, title, group):
 
     if group == "pause_duration":
         group_label = "pause"
+        yrange = [1e-3, 0.65]
     else:
         group_label = "quench slope"
+        yrange = [1e-4, 0.5]
 
     fig, ax = plt.subplots(figsize=(12,12))
     ax.set_title(title)
-    plt.xlabel('s at Pause Start')
+    plt.xlabel('Start s')
     plt.ylabel('Ground-State Fraction')
     ax.set_yscale('log')
-    ax.set_ylim([1e-3, 0.65])
+    ax.set_ylim(yrange)
 
     colors = cycle(all_colors)
     lines = cycle(all_lines)
