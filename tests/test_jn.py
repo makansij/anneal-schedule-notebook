@@ -86,7 +86,7 @@ class TestJupyterNotebook(unittest.TestCase):
         self.assertIn("Annealing time range", cell_text(nb, 7))
 
         # Section Understanding the Anneal Schedule, Subsection Pause, code cell 1
-        self.assertIn("Schedule", cell_output(nb, 11, 2, "text"))
+        self.assertIn("Schedule", cell_output(nb, 11, 0, "text"))
 
         # Section Understanding the Anneal Schedule, Subsection Quesnch, code cell 1
         self.assertIn("Schedule", cell_output(nb, 14, 0, "text"))
@@ -104,13 +104,13 @@ class TestJupyterNotebook(unittest.TestCase):
         self.assertIn("Ground state probability", cell_text(nb, 26))
 
         # Section Using Anneal Schedule Features, Subsection Using Pause, code cell 2
-        self.assertIn("application/javascript", cell_output(nb, 30, 1, "data"))
+        self.assertIn("text/plain", cell_output(nb, 30, 0, "data"))
 
         # Section Using Anneal Schedule Features, Subsection Using Pause, code cell 3
         self.assertIn("Success probability", cell_output(nb, 32, 0, "text"))
 
         # Section Using Anneal Schedule Features, Subsection Quench, code cell 2
-        self.assertIn("application/javascript", cell_output(nb, 36, 1, "data"))
+        self.assertIn("text/plain", cell_output(nb, 36, 0, "data"))
 
         # Section Using Anneal Schedule Features, Subsection Quench, code cell 3
         self.assertIn("Success probability", cell_output(nb, 38, 0, "text"))
