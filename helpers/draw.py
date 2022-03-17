@@ -27,7 +27,7 @@ def plot_schedule(schedule, title):
 
 # Plot the success fraction of an anneal schedule
 all_colors = ["dodgerblue", "orange", "darkorchid"]
-all_lines = [[4, 1, 1, 4], [4, 4], [4, 0]]
+all_lines = [[4, 1, 4, 2], [4, 4], [3, 1, 2, 2]]
 all_markers = ["o", "s", "^", "D"]
 
 def plot_success_fraction(success_prob, title, group):
