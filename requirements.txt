@@ -6,4 +6,3 @@ autopep8
 
 pandas
 matplotlib~=3.0
-bokeh
