@@ -31,6 +31,8 @@ The notebook has the following sections:
 3. **Mapping Various Anneal Schedules** provides code that sweeps through various
    anneal schedules to explore the effect on results.
 
+![pause](images/pause_success_fraction.png)
+
 ## Installation
 
 You can run this example
