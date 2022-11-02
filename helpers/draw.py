@@ -62,6 +62,6 @@ def plot_success_fraction(success_prob, title, group):
             ax.plot(x, y, label=f"anneal={anneal}, {group_label}={pq}", color=col, dashes=line, linewidth=2)
             ax.scatter(x, y, color=col)
 
-    ax.legend(loc='upper left')
+    ax.legend(loc='lower right')
     plt.show()
     return {"figure": fig, "axis": ax}
