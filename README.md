@@ -1,6 +1,6 @@
-[![Open in Leap IDE](
-  https://cdn-assets.cloud.dwavesys.com/shared/latest/badges/leapide.svg)](
-  https://ide.dwavesys.io/#https://github.com/dwave-examples/anneal-schedule-notebook)
+[![Open in GitHub Codespaces](
+  https://img.shields.io/badge/Open%20in%20GitHub%20Codespaces-333?logo=github)](
+  https://codespaces.new/dwave-examples/anneal-schedule-notebook?quickstart=1)
 [![Linux/Mac/Windows build status](
   https://circleci.com/gh/dwave-examples/anneal-schedule-notebook.svg?style=shield)](
   https://circleci.com/gh/dwave-examples/anneal-schedule-notebook)
